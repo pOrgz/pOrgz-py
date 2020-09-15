@@ -51,10 +51,15 @@ the name of the user is the name of the database which contains all the files.</
 but later, this should be moved to a secure database, or an encryption policy will be set.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>username</strong> – as pOrgz supports multi-user, this looks for the username in
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – as pOrgz supports multi-user, this looks for the username in
 the directory .users, if not found then it invokes necessary commands
 to create the database and all the associated tables.
-This function should later be used by RestAPI, when integrated with GUI.</p>
+This function should later be used by RestAPI, when integrated with GUI.</p></li>
+<li><p><strong>userDir</strong> (<em>str: const</em>) – Directory where all the database are stored</p></li>
+<li><p><strong>database</strong> (<em>str: const</em>) – Name of the database, which is .users/username.db
+<a href="#id1"><span class="problematic" id="id2">*</span></a>.db extension specifies that it is a SQLite3 database Object</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py method">
@@ -63,10 +68,14 @@ This function should later be used by RestAPI, when integrated with GUI.</p>
 <dd><p>Checks the Connection Status</p>
 <p>If the database is available in the default (.users) path, then checks if it can be
 connected, else if there is no such path then creates a database and tries to connect.</p>
-<p>Returns:
-:param status: Returns True if available, else raise errors.</p>
-<p>Raises:
-PermissionError : if unable to creater directory and/or database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>status</strong> (<em>bool</em>) – Returns True if available, else raise errors.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>PermissionError</strong> – if unable to creater directory</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

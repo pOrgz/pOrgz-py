@@ -20,6 +20,12 @@ class pOrgz:
                      the directory .users, if not found then it invokes necessary commands
                      to create the database and all the associated tables.
                      This function should later be used by RestAPI, when integrated with GUI.
+
+    :type  userDir: str: const
+    :param userDir: Directory where all the database are stored
+
+    :type  database: str: const
+    :param database: Name of the database, which is .users/username.db
     """
 
     def __init__(self, username : str):
@@ -35,12 +41,14 @@ class pOrgz:
 
         If the database is available in the default (.users) path, then checks if it can be
         connected, else if there is no such path then creates a database and tries to connect.
+        If the path does not exists, then it creates the path and then builds all the tables from template.
 
-        Returns:
+        Returns
+        -------
+        :type  status: bool
         :param status: Returns True if available, else raise errors.
 
-        Raises:
-        PermissionError : if unable to creater directory and/or database
+        :raises PermissionError: if unable to creater directory
         """
 
         if not os.path.exists(self.userDir):
