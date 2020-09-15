@@ -33,7 +33,7 @@ setup(
 		packages    = find_packages(),
 		classifiers = [
 			"Programming Language :: Python :: 3",
-			"License :: OSI Approved :: Apache Software License" # Change as Required
+			"License :: OSI Approved :: MIT License" # Change as Required
 		],
 		python_requires  = ">=3.6",  # Specify Requirement
 		install_requires = ['numpy', 'flask', 'mysql-connector-python'] # Add/Edit as Required
