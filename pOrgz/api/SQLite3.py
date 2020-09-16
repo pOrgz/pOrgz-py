@@ -1,3 +1,7 @@
+# -*- encoding: utf-8 -*-
+
+"""Contains SQLite3 Query used for Various Purposes"""
+
 AccountDetails = """
 CREATE TABLE `AccountDetails` (
     `AccountNumber` bigint      NOT NULL ,
