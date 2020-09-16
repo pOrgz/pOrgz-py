@@ -10,6 +10,7 @@ import time
 import sqlite3
 
 from ._SQLite3 import *
+from ..exceptions import *
 
 class pOrgz:
     """A Core Class for Initializing and Defining Options for pOrgz
@@ -37,6 +38,15 @@ class pOrgz:
     :param userfile: Name of the File where all the users information is stored.
                      This file is created and invoked from :func:`pOrgz.userInfo()`
                      and a JSON structure is created.
+
+    :type  session: dict or JSON
+    :param session: The Session Objects holds Information about the User - as available
+                    from :func:`pOrgz.userInfo()`. If the file already exists, then fetch
+                    if from the file, else prompt user for the information, store it into
+                    the file.
+
+    :raises InvalidFileFormat: Mainly raised, if an invalid JSON file is obtained due to
+                               :func:`json.JSONDecodeError` while parsing JSON File/Object
     """
 
     def __init__(self, username : str):
@@ -47,8 +57,21 @@ class pOrgz:
         self.userfile = os.path.join(self.userDir, 'users.json')
         self.database = os.path.join(self.userDir, f'{self.username}.db')
 
+        # Check User Information, and Create Account
+        if not os.path.exists(self.userDir): # then create DB and PATH
+            os.mkdir(self.userDir)
+
+        if self.conStatus: # able to Create DataBase
+            try:
+                with open(self.userfile) as f:
+                    self.session = json.load(f)[self.username]
+            except (KeyError, FileNotFoundError): # Path Exists, but a New User or First-Run
+                self.session = self.userInfo()
+            except json.JSONDecodeError as err:
+                raise InvalidFileFormat(f'Invalid File-Format Found: Please Remove or Correct {self.userfile}')
+
     def userInfo(self):
-        """A Special Function, which stores the user informations
+        """A Special Function, which Registers a New User
         
         A special file ``users.json`` keeps tracks of all the user informations,
         if the user does not exists, then this function is automatically triggered and
@@ -88,49 +111,6 @@ class pOrgz:
                         Default ₹ 10, 000.00 /-
         """
 
-        if not os.path.exists(self.userfile):
-            try:
-                values = self._getUserInfo()
-
-                with open(self.userfile, 'w') as file_:
-                    json.dump({self.username : values}, file_)
-
-            except PermissionError as err:
-                raise PermissionError(f'Unable to create necessary file: {self.userfile}', err)
-
-    @property
-    def conStatus(self) -> bool:
-        """Checks the Connection Status
-
-        If the database is available in the default path, then checks if it can be
-        connected, else if there is no such path then creates a database and tries to connect.
-        If the path does not exists, then it creates the path and then builds all the tables from template.
-
-        :rtype:  bool
-        :return: `True` if connection was successful, `False` otherwise
-
-        :raises PermissionError: if unable to create directory
-        """
-
-        if not os.path.exists(self.userDir):
-            try:
-                os.mkdir(self.userDir)
-            except PermissionError as err:
-                raise PermissionError(f'Unable to directory: {self.userDir}', err)
-
-        con = sqlite3.connect(self.database) # no need of try-catch
-
-        # Create all Required Tables: Only One Query can be Executed at a Time
-        for query in [AccountDetails, AccountStatements, MobileWallets]:
-            con.execute(query)
-        
-        con.close() # Close DB File
-
-        return True
-
-    def _getUserInfo(self) -> dict:
-        """Asks Questions to Populate the User-Informations"""
-
         _fName = input("First Name*: ")
         _mName = input("Middle Name: ")
         _lName = input("Last/Family Name*: ")
@@ -144,21 +124,53 @@ class pOrgz:
         else:
             _defRisk = 0.45
 
-        _risk  = float(input(f"Risk Factor (0 - 1) [{_defRisk}]:"))
+        _risk  = float(input(f"Risk Factor (0 - 1) [{_defRisk}]:") or _defRisk)
         if (_risk > 1) or (_risk < 0):
             raise ValueError(f'Risk Factor should be between 0 and 1, got {_risk}')
 
         _capital = float(input('Capital Amount (monthly intake) [10000.00]: ') or '10000')
 
-        return {
-            "ID"          : int(time.time()),
-            "first_name"  : _fName,
-            "middle_name" : _mName,
-            "last_name"   : _lName,
-            "age"         : _age,
-            "risk"        : _risk,
-            "captial"     : _capital
-        }
+        if not os.path.exists(self.userfile):
+            values = {
+                "ID"          : int(time.time()),
+                "first_name"  : _fName,
+                "middle_name" : _mName,
+                "last_name"   : _lName,
+                "age"         : _age,
+                "risk"        : _risk,
+                "captial"     : _capital
+            }
+            with open(self.userfile, 'w') as f:
+                json.dump({self.username : values}, f, indent = 4)
+
+        return values
+
+    @property
+    def conStatus(self) -> bool:
+        """Checks the Connection Status
+
+        If the database is available in the default path, then checks if it can be
+        connected, else if there is no such path then creates a database and tries to connect.
+        If the path does not exists, then it creates the path and then builds all the tables from template.
+
+        :rtype:  bool
+        :return: `True` if connection was successful, `False` otherwise
+        """
+
+        if os.path.exists(self.database):
+            create_table = False
+        else:
+            create_table = True
+
+        con = sqlite3.connect(self.database) # no need of try-catch
+
+        # Create all Required Tables: Only One Query can be Executed at a Time
+        if create_table:
+            for query in [AccountDetails, AccountStatements, MobileWallets]:
+                con.execute(query)
+        
+        con.close() # Close DB File
+        return True
 
     def _defaultRisk_byAge(self, param : int) -> int:
         """Default Risk Values, based on Age"""

@@ -61,7 +61,14 @@ This function should later be used by RestAPI, when integrated with GUI.</p></li
 <li><p><strong>userfile</strong> (<em>str: const</em>) – Name of the File where all the users information is stored.
 This file is created and invoked from <a class="reference internal" href="#pOrgz.api.pOrgz.userInfo" title="pOrgz.api.pOrgz.userInfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">pOrgz.userInfo()</span></code></a>
 and a JSON structure is created.</p></li>
+<li><p><strong>session</strong> (<em>dict</em><em> or </em><em>JSON</em>) – The Session Objects holds Information about the User - as available
+from <a class="reference internal" href="#pOrgz.api.pOrgz.userInfo" title="pOrgz.api.pOrgz.userInfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">pOrgz.userInfo()</span></code></a>. If the file already exists, then fetch
+if from the file, else prompt user for the information, store it into
+the file.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="pOrgz.exceptions.html#pOrgz.exceptions.InvalidFileFormat" title="pOrgz.exceptions.InvalidFileFormat"><strong>InvalidFileFormat</strong></a> – hgh</p>
 </dd>
 </dl>
 <dl class="py method">
@@ -78,16 +85,13 @@ If the path does not exists, then it creates the path and then builds all the ta
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><cite>True</cite> if connection was successful, <cite>False</cite> otherwise</p>
 </dd>
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>PermissionError</strong> – if unable to create directory</p>
-</dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="pOrgz.api.pOrgz.userInfo">
 <code class="sig-name descname">userInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pOrgz.api.pOrgz.userInfo" title="Permalink to this definition">¶</a></dt>
-<dd><p>A Special Function, which stores the user informations</p>
+<dd><p>A Special Function, which Registers a New User</p>
 <p>A special file <code class="docutils literal notranslate"><span class="pre">users.json</span></code> keeps tracks of all the user informations,
 if the user does not exists, then this function is automatically triggered and
 the file is updated accordingly. Apart from this, it also checks if
