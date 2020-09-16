@@ -6,7 +6,6 @@ The heart of the :mod:`pOrgz` is the API Module, which is used by other submodul
  - :mod:`core` - The Brain where all AI-ML Codes (will) Resides
  - :mod:`commons` - Some common Functionalities (to make life easier!)
 The Base Classes are as follows:
-
 """
 
 from .base import pOrgz
