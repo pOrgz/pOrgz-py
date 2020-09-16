@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pOrgz.api package &#8212; pOrgz: Financial Organizer 0.0.1 documentation</title>
+    <title>API Overview &#8212; pOrgz: Financial Organizer 0.0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -15,8 +15,7 @@
     <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="pOrgz.commons package" href="pOrgz.commons.html" />
-    <link rel="prev" title="pOrgz package" href="pOrgz.html" />
+    <link rel="prev" title="Welcome to pOrgz: Financial Organizer’s documentation!" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,14 +32,20 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="porgz-api-package">
-<h1>pOrgz.api package<a class="headerlink" href="#porgz-api-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-pOrgz.api">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pOrgz.api" title="Permalink to this headline">¶</a></h2>
-<p>Global Level Configurations and Parameters are Defined</p>
-<dl class="py class">
-<dt id="pOrgz.api.pOrgz">
-<em class="property">class </em><code class="sig-prename descclassname">pOrgz.api.</code><code class="sig-name descname">pOrgz</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">username</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pOrgz.api.pOrgz" title="Permalink to this definition">¶</a></dt>
+  <div class="section" id="module-pOrgz.api">
+<span id="api-overview"></span><h1>API Overview<a class="headerlink" href="#module-pOrgz.api" title="Permalink to this headline">¶</a></h1>
+<p>The Programming Interface - like Selection, Initializations and Customizations</p>
+<dl class="simple">
+<dt>The heart of the <a class="reference internal" href="pOrgz.html#module-pOrgz" title="pOrgz"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pOrgz</span></code></a> is the API Module, which is used by other submodules like:</dt><dd><ul class="simple">
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">core</span></code> - The Brain where all AI-ML Codes (will) Resides</p></li>
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">commons</span></code> - Some common Functionalities (to make life easier!)</p></li>
+</ul>
+</dd>
+</dl>
+<p>The Base Classes are as follows:</p>
+<span class="target" id="module-pOrgz.api.base"></span><dl class="py class">
+<dt id="pOrgz.api.base.pOrgz">
+<em class="property">class </em><code class="sig-prename descclassname">pOrgz.api.base.</code><code class="sig-name descname">pOrgz</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">username</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pOrgz.api.base.pOrgz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A Core Class for Initializing and Defining Options for pOrgz</p>
 <p>A new/existing user will reside in <code class="docutils literal notranslate"><span class="pre">.users</span></code> directory for and <code class="xref py py-class docutils literal notranslate"><span class="pre">pOrgz.pOrgz</span></code> to work,
@@ -59,10 +64,10 @@ This function should later be used by RestAPI, when integrated with GUI.</p></li
 <li><p><strong>userDir</strong> (<em>str: const</em>) – Directory where all the database are stored, which is <code class="docutils literal notranslate"><span class="pre">.users</span></code></p></li>
 <li><p><strong>database</strong> (<em>str: const</em>) – Name of the database, which is <code class="docutils literal notranslate"><span class="pre">.users/username.db</span></code></p></li>
 <li><p><strong>userfile</strong> (<em>str: const</em>) – Name of the File where all the users information is stored.
-This file is created and invoked from <a class="reference internal" href="#pOrgz.api.pOrgz.userInfo" title="pOrgz.api.pOrgz.userInfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">pOrgz.userInfo()</span></code></a>
+This file is created and invoked from <a class="reference internal" href="#pOrgz.api.base.pOrgz.userInfo" title="pOrgz.api.base.pOrgz.userInfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">pOrgz.userInfo()</span></code></a>
 and a JSON structure is created.</p></li>
 <li><p><strong>session</strong> (<em>dict</em><em> or </em><em>JSON</em>) – The Session Objects holds Information about the User - as available
-from <a class="reference internal" href="#pOrgz.api.pOrgz.userInfo" title="pOrgz.api.pOrgz.userInfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">pOrgz.userInfo()</span></code></a>. If the file already exists, then fetch
+from <a class="reference internal" href="#pOrgz.api.base.pOrgz.userInfo" title="pOrgz.api.base.pOrgz.userInfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">pOrgz.userInfo()</span></code></a>. If the file already exists, then fetch
 if from the file, else prompt user for the information, store it into
 the file.</p></li>
 </ul>
@@ -73,8 +78,8 @@ the file.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="pOrgz.api.pOrgz.conStatus">
-<em class="property">property </em><code class="sig-name descname">conStatus</code><a class="headerlink" href="#pOrgz.api.pOrgz.conStatus" title="Permalink to this definition">¶</a></dt>
+<dt id="pOrgz.api.base.pOrgz.conStatus">
+<em class="property">property </em><code class="sig-name descname">conStatus</code><a class="headerlink" href="#pOrgz.api.base.pOrgz.conStatus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks the Connection Status</p>
 <p>If the database is available in the default path, then checks if it can be
 connected, else if there is no such path then creates a database and tries to connect.
@@ -90,8 +95,8 @@ If the path does not exists, then it creates the path and then builds all the ta
 </dd></dl>
 
 <dl class="py method">
-<dt id="pOrgz.api.pOrgz.userInfo">
-<code class="sig-name descname">userInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pOrgz.api.pOrgz.userInfo" title="Permalink to this definition">¶</a></dt>
+<dt id="pOrgz.api.base.pOrgz.userInfo">
+<code class="sig-name descname">userInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pOrgz.api.base.pOrgz.userInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>A Special Function, which Registers a New User</p>
 <p>A special file <code class="docutils literal notranslate"><span class="pre">users.json</span></code> keeps tracks of all the user informations,
 if the user does not exists, then this function is automatically triggered and
@@ -126,7 +131,6 @@ Default ₹ 10, 000.00 /-</p></li>
 </dd></dl>
 
 </div>
-</div>
 
 
           </div>
@@ -147,22 +151,14 @@ Default ₹ 10, 000.00 /-</p></li>
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pOrgz</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="pOrgz.html">pOrgz package</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Overview</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="modules.html">pOrgz</a><ul>
-  <li><a href="pOrgz.html">pOrgz package</a><ul>
-      <li>Previous: <a href="pOrgz.html" title="previous chapter">pOrgz package</a></li>
-      <li>Next: <a href="pOrgz.commons.html" title="next chapter">pOrgz.commons package</a></li>
-  </ul></li>
-  </ul></li>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to pOrgz: Financial Organizer’s documentation!</a></li>
   </ul></li>
 </ul>
 </div>
