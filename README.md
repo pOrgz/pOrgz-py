@@ -3,6 +3,7 @@
     <a href="https://github.com/ZenithClown/pOrgz/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/ZenithClown/pOrgz?style=plastic"></a>
     <a href="https://github.com/ZenithClown/pOrgz/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/ZenithClown/pOrgz?style=plastic"></a>
     <img alt="Python Requirements" src="https://img.shields.io/badge/python-%3E%3D3.6-lightgrey?style=plastic&logo=python">
+    <a href="https://pypi.org/project/pOrgz/"><img alt="PyPI Package" src="https://img.shields.io/badge/PyPI-0.0.1-informational?style=plastic&logo=pypi"/></a>
 </h1>
 
 <p align = "justify"><b>pOrgz</b> is a Python based Web-Application, build for managing a person's financial informations. This is a hobby project, that I decided to build to manage my own financial informations and integrating possibly integrating predictive analytical models. The app is never meant to be run in localhost without the need of any internet connection!</p>
