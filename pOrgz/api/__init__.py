@@ -3,10 +3,13 @@
 """Global Level Configurations and Parameters are Defined"""
 
 import os
+import sys
 import glob
 import json
 import time
 import sqlite3
+
+from ._SQLite3 import *
 
 class pOrgz:
     """A Core Class for Initializing and Defining Options for pOrgz
@@ -115,7 +118,13 @@ class pOrgz:
             except PermissionError as err:
                 raise PermissionError(f'Unable to directory: {self.userDir}', err)
 
-        connection = sqlite3.connect(self.database) # no need of try-catch
+        con = sqlite3.connect(self.database) # no need of try-catch
+
+        # Create all Required Tables: Only One Query can be Executed at a Time
+        for query in [AccountDetails, AccountStatements, MobileWallets]:
+            con.execute(query)
+        
+        con.close() # Close DB File
 
         return True
 
