@@ -214,5 +214,32 @@ class AccountInformation(metaclass = ABCMeta):
                    Simply speaking: **Credit** in a savings account is `+` in analysis
                    and the total monthly **Debit** in credit account should be equal
                    to the credit amount.
+
+    :type  IFSCCode: str
+    :param IFSCCode: IFSC Code of the Account (optional, default None)
+
+    :type  CIFNumber: str
+    :param CIFNumber: CIF Number of the Account (optional, default None)
+
+    :type  ACOpenDate: str
+    :param ACOpenDate: Date on which the account was created.
+
+    :type  ACCloseDate: str
+    :param ACCloseDate: Date on which the account is closed, defaults to None
+
+    :type  ContactEmail: str
+    :param ContactEmail: Email ID Associated with the account, defaults to None
+
+    :type  ContactMobile: str
+    :param ContactMobile: Mobile No. Associated with the account. This is required field.
+
+    :type  BankName: str
+    :param BankName: Name of the Bank where the Account was Created
+
+    :type  BranchName: str
+    :param BranchName: Branch Name of the Account, defaults to None
+
+    :type  CardNumber: str
+    :param CardNumber: 15/16-Digit Card Number Associated with the Account, defaults to None
     """
     pass

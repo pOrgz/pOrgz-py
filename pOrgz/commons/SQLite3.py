@@ -23,7 +23,7 @@ CREATE TABLE `AccountDetails` (
     `ContactMobile` bigint      NOT NULL ,
     `BankName`      varchar(45) NOT NULL ,
     `BranchName`    varchar(45) NULL ,
-    `CardNumber`    bigint      NOT NULL ,
+    `CardNumber`    bigint      NULL ,
 
     PRIMARY KEY (`AccountNumber`)
 );"""
