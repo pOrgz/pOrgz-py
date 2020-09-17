@@ -1,13 +1,20 @@
 # -*- encoding: utf-8 -*-
 
-import os
-import sys
 import glob
 import json
 import time
 import sqlite3
 
-from ..SQLite3 import *
+from abc import ABCMeta
+
+from ..SQLite3 import (
+        # Get SQLite Statements to Create Required Tables
+        AccountDetails,
+        AccountStatements,
+        # MobileWallets
+    )
+
+from .config import defaults
 from ..exceptions import InvalidFileFormat
 
 class pOrgz:
@@ -45,14 +52,16 @@ class pOrgz:
 
     :raises InvalidFileFormat: Mainly raised, if an invalid JSON file is obtained due to
                                :func:`json.JSONDecodeError` while parsing JSON File/Object
+    :raises ValueError: If this is raised - then you are advised to raise an Issue with the
+                        details, as a fallback mechanism is raised while defining defaults.
     """
 
     def __init__(self, username : str):
         self.username = username
 
         # Constants
-        self.userDir  = os.path.join('.', '.users')
-        self.userfile = os.path.join(self.userDir, 'users.json')
+        self.userDir  = defaults('base_dir')
+        self.userfile = defaults('base_file')
         self.database = os.path.join(self.userDir, f'{self.username}.db')
 
         # Check User Information, and Create Account
@@ -164,7 +173,7 @@ class pOrgz:
 
         # Create all Required Tables: Only One Query can be Executed at a Time
         if create_table:
-            for query in [AccountDetails, AccountStatements, MobileWallets]:
+            for query in [AccountDetails, AccountStatements]:
                 con.execute(query)
         
         con.close() # Close DB File
@@ -177,3 +186,20 @@ class pOrgz:
             30 : lambda : 0.85,
             40 : lambda : 0.60
         }.get(param, lambda : 0.45)()
+
+class AccountInformation(metaclass = ABCMeta):
+    """An Abstract Base Class of a User's Account, which has
+    the following Attributes associated:
+
+    :type  AccountNumber: int: Unique
+    :param AccountNumber: Account Number which is typically 10+ digits Long
+                          A user can have multiple account, which are all identified
+                          by this unique number. Since SQLite3 are built with dynamic
+                          typing, thus :py:attr:`~_is_exists` checks if the account already
+                          exists.
+
+    :type  ACHolderName: str
+    :param ACHolderName: Name of the Account Holder, which is auto-included (by Default)
+                         from the information stored in `users.json`
+    """
+    pass
