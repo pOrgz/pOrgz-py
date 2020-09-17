@@ -4,6 +4,7 @@ import glob
 import json
 import time
 import sqlite3
+import datetime
 
 from abc import ABCMeta
 
@@ -15,6 +16,7 @@ from ..commons.SQLite3 import (
     )
 
 from .config import defaults
+from ._decorator import initializer
 from ..exceptions import InvalidFileFormat
 
 class pOrgz:
@@ -230,7 +232,7 @@ class AccountInformation(metaclass = ABCMeta):
     :type  ContactEmail: str
     :param ContactEmail: Email ID Associated with the account, defaults to None
 
-    :type  ContactMobile: str
+    :type  ContactMobile: int
     :param ContactMobile: Mobile No. Associated with the account. This is required field.
 
     :type  BankName: str
@@ -242,4 +244,21 @@ class AccountInformation(metaclass = ABCMeta):
     :type  CardNumber: str
     :param CardNumber: 15/16-Digit Card Number Associated with the Account, defaults to None
     """
-    pass
+
+    @initializer
+    def __init__(
+            self,
+            AccountNumber : int,
+            ACHolderName  : str,
+            ACOpenDate    : datetime.datetime,
+            ContactMobile : int,
+            BankName      : str,
+            ACType        : str = 'savings',
+            IFSCCode      : str = None,
+            CIFNumber     : str = None,
+            ACCloseDate   : datetime.datetime = None,
+            ContactEmail  : str = None,
+            BranchName    : str = None,
+            CardNumber    : str = None
+        ):
+        pass
