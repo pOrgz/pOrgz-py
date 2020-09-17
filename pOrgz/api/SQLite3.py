@@ -1,6 +1,14 @@
 # -*- encoding: utf-8 -*-
 
-"""Contains SQLite3 Query used for Various Purposes"""
+"""Contains SQLite3 Query used for Various Purposes
+
+NOTE: SQLite3 does not check for Data-Types while inserting data, as it supports
+Dynamic Typing: https://sqlite.org/faq.html#q3
+
+Thus, all the types and key bindings are not necessary - however it will serve as
+hint for data merging later. Also, when encrypted service is enabled, this will be
+updated accordingly.
+"""
 
 AccountDetails = """
 CREATE TABLE `AccountDetails` (
