@@ -245,7 +245,7 @@ class AccountInformation(metaclass = ABCMeta):
     :param CardNumber: 15/16-Digit Card Number Associated with the Account, defaults to None
     """
 
-    @initializer
+    # @initializer
     def __init__(
             self,
             AccountNumber : int,
@@ -259,6 +259,8 @@ class AccountInformation(metaclass = ABCMeta):
             ACCloseDate   : datetime.datetime = None,
             ContactEmail  : str = None,
             BranchName    : str = None,
-            CardNumber    : str = None
+            CardNumber    : str = None,
+            *args,
+            **kwargs
         ):
         pass
