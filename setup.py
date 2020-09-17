@@ -17,7 +17,7 @@ except FileNotFoundError as err:
 	raise RuntimeError(f'is PKG = {PKG} correctly defined? {err}')
 
 with open("README.md", "r") as fh:
-	long_description = fh.read()
+	long_description = fh.read() # Need to Change the File
 
 setup(
 		name         = PKG,
@@ -25,11 +25,11 @@ setup(
 		author       = "Debmalya Pramanik",
 		author_email = "",
 
-		description                   = "<SHORT PROJECT DESCRIPTION>",
+		description                   = "A Financial Organizer and Predictor",
 		long_description              = long_description,
 		long_description_content_type = "text/markdown",
 
-		url         = "<project url>",
+		url         = "https://github.com/ZenithClown/pOrgz",
 		packages    = find_packages(),
 		classifiers = [
 			"Programming Language :: Python :: 3",
