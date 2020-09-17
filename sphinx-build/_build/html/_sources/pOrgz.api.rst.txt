@@ -1,12 +1,30 @@
-API Overview
-============
+pOrgz.api package
+=================
 
-.. automodule:: pOrgz.api
+Submodules
+----------
+
+pOrgz.api.base module
+---------------------
+
+.. automodule:: pOrgz.api.base
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: pOrgz.api.base
+pOrgz.api.config module
+-----------------------
+
+.. automodule:: pOrgz.api.config
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: pOrgz.api
    :members:
    :undoc-members:
    :show-inheritance:

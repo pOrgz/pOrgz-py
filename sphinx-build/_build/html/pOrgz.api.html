@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Overview &#8212; pOrgz: Financial Organizer 0.0.1 documentation</title>
+    <title>pOrgz.api package &#8212; pOrgz: Financial Organizer 0.0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,104 +32,20 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="module-pOrgz.api">
-<span id="api-overview"></span><h1>API Overview<a class="headerlink" href="#module-pOrgz.api" title="Permalink to this headline">¶</a></h1>
-<p>The Programming Interface - like Selection, Initializations and Customizations</p>
-<dl class="simple">
-<dt>The heart of the <a class="reference internal" href="pOrgz.html#module-pOrgz" title="pOrgz"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pOrgz</span></code></a> is the API Module, which is used by other submodules like:</dt><dd><ul class="simple">
-<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">core</span></code> - The Brain where all AI-ML Codes (will) Resides</p></li>
-<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">commons</span></code> - Some common Functionalities (to make life easier!)</p></li>
-</ul>
-</dd>
-</dl>
-<p>The Base Classes are as follows:</p>
-<span class="target" id="module-pOrgz.api.base"></span><dl class="py class">
-<dt id="pOrgz.api.base.pOrgz">
-<em class="property">class </em><code class="sig-prename descclassname">pOrgz.api.base.</code><code class="sig-name descname">pOrgz</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">username</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pOrgz.api.base.pOrgz" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>A Core Class for Initializing and Defining Options for pOrgz</p>
-<p>A new/existing user will reside in <code class="docutils literal notranslate"><span class="pre">.users</span></code> directory for and <code class="xref py py-class docutils literal notranslate"><span class="pre">pOrgz.pOrgz</span></code> to work,
-if the directory does not exists then a directory of the same name is created by default.
-Once the directory is created, all individual user have their own database, where
-the name of the user is the name of the database which contains all the files.</p>
-<p>Currently, all the information is stored in an unencrypted DB (provided by <code class="docutils literal notranslate"><span class="pre">SQLite3</span></code>),
-but later, this should be moved to a secure database, or an encryption policy will be set.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>username</strong> – as <a class="reference internal" href="pOrgz.html#module-pOrgz" title="pOrgz"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pOrgz</span></code></a> supports multi-user, this looks for the username in
-the directory <code class="docutils literal notranslate"><span class="pre">.users</span></code>, if not found then it invokes necessary commands
-to create the database and all the associated tables.
-This function should later be used by RestAPI, when integrated with GUI.</p></li>
-<li><p><strong>userDir</strong> (<em>str: const</em>) – Directory where all the database are stored, which is <code class="docutils literal notranslate"><span class="pre">.users</span></code></p></li>
-<li><p><strong>database</strong> (<em>str: const</em>) – Name of the database, which is <code class="docutils literal notranslate"><span class="pre">.users/username.db</span></code></p></li>
-<li><p><strong>userfile</strong> (<em>str: const</em>) – Name of the File where all the users information is stored.
-This file is created and invoked from <a class="reference internal" href="#pOrgz.api.base.pOrgz.userInfo" title="pOrgz.api.base.pOrgz.userInfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">pOrgz.userInfo()</span></code></a>
-and a JSON structure is created.</p></li>
-<li><p><strong>session</strong> (<em>dict</em><em> or </em><em>JSON</em>) – The Session Objects holds Information about the User - as available
-from <a class="reference internal" href="#pOrgz.api.base.pOrgz.userInfo" title="pOrgz.api.base.pOrgz.userInfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">pOrgz.userInfo()</span></code></a>. If the file already exists, then fetch
-if from the file, else prompt user for the information, store it into
-the file.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="pOrgz.exceptions.html#pOrgz.exceptions.InvalidFileFormat" title="pOrgz.exceptions.InvalidFileFormat"><strong>InvalidFileFormat</strong></a> – Mainly raised, if an invalid JSON file is obtained due to
-<code class="xref py py-func docutils literal notranslate"><span class="pre">json.JSONDecodeError()</span></code> while parsing JSON File/Object</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt id="pOrgz.api.base.pOrgz.conStatus">
-<em class="property">property </em><code class="sig-name descname">conStatus</code><a class="headerlink" href="#pOrgz.api.base.pOrgz.conStatus" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks the Connection Status</p>
-<p>If the database is available in the default path, then checks if it can be
-connected, else if there is no such path then creates a database and tries to connect.
-If the path does not exists, then it creates the path and then builds all the tables from template.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><cite>True</cite> if connection was successful, <cite>False</cite> otherwise</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="pOrgz.api.base.pOrgz.userInfo">
-<code class="sig-name descname">userInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pOrgz.api.base.pOrgz.userInfo" title="Permalink to this definition">¶</a></dt>
-<dd><p>A Special Function, which Registers a New User</p>
-<p>A special file <code class="docutils literal notranslate"><span class="pre">users.json</span></code> keeps tracks of all the user informations,
-if the user does not exists, then this function is automatically triggered and
-the file is updated accordingly. Apart from this, it also checks if
-the number of keys i.e. user count is same as that of the database created.
-In the following questions, if marked with a <code class="docutils literal notranslate"><span class="pre">*</span></code> then the value is advised,
-while others are optional. If any has a default value, then it is mentioned in
-square brackets.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>ID</strong> (<em>int</em>) – An Unique ID Associated with the User, automatically generated.</p></li>
-<li><p><strong>first_name</strong> (<em>str</em>) – First Name of the User</p></li>
-<li><p><strong>middle_name</strong> (<em>str</em>) – Middile Name of the User</p></li>
-<li><p><strong>last_name</strong> (<em>str</em>) – Middile Name of the User</p></li>
-<li><p><strong>age</strong> (<em>float</em>) – Age of the User</p></li>
-<li><p><strong>risk</strong> (<em>float</em>) – Based on the age of the user, a default risk is associated. Default Risk Values
-- based on the User’s Age, are
-If <code class="docutils literal notranslate"><span class="pre">age</span> <span class="pre">&lt;</span> <span class="pre">30</span> <span class="pre">:</span> <span class="pre">risk</span> <span class="pre">=</span> <span class="pre">85%</span></code> elseif <code class="docutils literal notranslate"><span class="pre">age</span> <span class="pre">&lt;</span> <span class="pre">40</span> <span class="pre">:</span> <span class="pre">risk</span> <span class="pre">=</span> <span class="pre">60%</span></code> else <code class="docutils literal notranslate"><span class="pre">risk</span> <span class="pre">=</span> <span class="pre">45%</span></code>
-The value of the risk is between 0 to 1, example:
-<code class="docutils literal notranslate"><span class="pre">risk</span> <span class="pre">=</span> <span class="pre">0.9</span> <span class="pre">=</span> <span class="pre">90%</span></code> signifies the user is ready to invest 90% of its capital
-into risky-investements like stocks.</p></li>
-<li><p><strong>capital</strong> – Capital Amount, i.e. the monthly intake of the user (from all sources).
-Initially, it is advised that the user provides some values. However,
-efficient algorithms should be able to gather this amount.
-Default ₹ 10, 000.00 /-</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+  <div class="section" id="porgz-api-package">
+<h1>pOrgz.api package<a class="headerlink" href="#porgz-api-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="porgz-api-base-module">
+<h2>pOrgz.api.base module<a class="headerlink" href="#porgz-api-base-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="porgz-api-config-module">
+<h2>pOrgz.api.config module<a class="headerlink" href="#porgz-api-config-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -151,7 +67,13 @@ Default ₹ 10, 000.00 /-</p></li>
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pOrgz.api package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#porgz-api-base-module">pOrgz.api.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#porgz-api-config-module">pOrgz.api.config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-contents">Module contents</a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
