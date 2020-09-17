@@ -7,7 +7,7 @@ import json
 import time
 import sqlite3
 
-from .SQLite3 import *
+from ..SQLite3 import *
 from ..exceptions import InvalidFileFormat
 
 class pOrgz:
