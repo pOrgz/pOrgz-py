@@ -10,7 +10,7 @@ Welcome to pOrgz: Financial Organizer's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   pOrgz.api.rst
+   modules.rst
 
 Indices and tables
 ==================

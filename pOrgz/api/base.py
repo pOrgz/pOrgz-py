@@ -7,7 +7,7 @@ import sqlite3
 
 from abc import ABCMeta
 
-from ..SQLite3 import (
+from ..commons.SQLite3 import (
         # Get SQLite Statements to Create Required Tables
         AccountDetails,
         AccountStatements,
@@ -201,5 +201,18 @@ class AccountInformation(metaclass = ABCMeta):
     :type  ACHolderName: str
     :param ACHolderName: Name of the Account Holder, which is auto-included (by Default)
                          from the information stored in `users.json`
+
+    :type  ACType: str
+    :param ACType: Type of the Account, which are as follows:
+
+                   - savings: Savings Account (default)
+                   - credit : Credit Card Account
+                   - wallet : Signifies Mobile Wallet Accounts
+
+                   It is important to provide an account type, as it signifies
+                   critical informations - required for predictive analysis.
+                   Simply speaking: **Credit** in a savings account is `+` in analysis
+                   and the total monthly **Debit** in credit account should be equal
+                   to the credit amount.
     """
     pass
