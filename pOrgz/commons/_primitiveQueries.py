@@ -23,15 +23,6 @@ def _insert_data_into_account_statements(data : pd.DataFrame, base_obj, include_
             ' Debit'             : 'Debit' # I've no Idea why there is a Space -_-
         }, inplace = True)
 
-
-    query = """INSERT OR REPLACE INTO
-        AccountStatements(AccountNumber, TXNDate, ValueDate, Description, Remarks, Debit, Credit, Balance)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    """
-
-    # con.execute(query, data.to_records(index = False))
-    # con.commit()
-
     data.to_sql('AccountStatements', con, if_exists = 'append', index = False)
 
     con.close()
