@@ -132,3 +132,6 @@ dmypy.json
 
 # Excluding _test directory
 _test/
+
+# Exclude LongDescription.md
+LongDescription.md
