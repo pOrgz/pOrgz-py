@@ -16,8 +16,8 @@ try:
 except FileNotFoundError as err:
 	raise RuntimeError(f'is PKG = {PKG} correctly defined? {err}')
 
-with open("README.md", "r") as fh:
-	long_description = fh.read() # Need to Change the File
+with open("LongDescription.md", "r") as fh:
+	long_description = fh.read()
 
 setup(
 		name         = PKG,
