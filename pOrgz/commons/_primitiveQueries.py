@@ -7,13 +7,15 @@ for which these module are built to provide basic functionalities.
 import sqlite3
 import pandas as pd
 
-def _insert_data_into_account_statements(data : pd.DataFrame, account_number : int, base_obj):
+def _insert_data_into_account_statements(data : pd.DataFrame, base_obj, include_account = True, account_number = None):
     """Insert Data into Account Statement Table Created in SQLite3"""
 
     data = data.copy() # copy the data within function - to preserve the original data
     con = sqlite3.connect(base_obj.database)
 
-    data['AccountNumber'] = account_number
+    if include_account:
+        data['AccountNumber'] = account_number
+
     data.rename(columns = {
             'Txn Date'           : 'TXNDate',
             'Value Date'         : 'ValueDate',
