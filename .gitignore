@@ -135,3 +135,6 @@ _test/
 
 # Exclude LongDescription.md
 LongDescription.md
+
+# Ignore .jovianrc currently, need to check this
+.jovianrc
