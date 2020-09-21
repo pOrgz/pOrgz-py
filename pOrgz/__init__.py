@@ -7,7 +7,7 @@ __copyright__ = f"Copyright (c) [year] {__author__}"
 # __docformat__ = ""
 
 # Let's Check for the Dependencies
-hardDependencies    = ['numpy', 'flask', 'mysql.connector'] # remove/update from setup.py
+hardDependencies    = ['numpy'] # remove/update from setup.py
 # mysql.connector is currently not required, but in subsequent future update this will be required.
 missingDependencies = []
 

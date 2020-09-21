@@ -29,12 +29,12 @@ setup(
 		long_description              = long_description,
 		long_description_content_type = "text/markdown",
 
-		url         = "https://github.com/ZenithClown/pOrgz",
+		url         = "https://github.com/pOrgz/pOrgz-py",
 		packages    = find_packages(),
 		classifiers = [
 			"Programming Language :: Python :: 3",
 			"License :: OSI Approved :: MIT License" # Change as Required
 		],
 		python_requires  = ">=3.6",  # Specify Requirement
-		install_requires = ['numpy', 'flask', 'mysql-connector-python'] # Add/Edit as Required
+		install_requires = ['numpy'] # Add/Edit as Required
 	)
