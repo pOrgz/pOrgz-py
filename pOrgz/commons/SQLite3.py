@@ -8,6 +8,8 @@ Dynamic Typing: https://sqlite.org/faq.html#q3
 Thus, all the types and key bindings are not necessary - however it will serve as
 hint for data merging later. Also, when encrypted service is enabled, this will be
 updated accordingly.
+
+NOTE: This file has to be Removed from Documentations!
 """
 
 AccountDetails = """
@@ -38,6 +40,19 @@ CREATE TABLE `AccountStatements` (
     'Debit'         numeric     NULL ,
     'Credit'        numeric     NULL ,
     'Balance'       numeric     NOT NULL ,
+
+    CONSTRAINT fk_ACNumber
+        FOREIGN KEY (`AccountNumber`)
+        REFERENCES 'AccountDetails'(`AccountNumber`)
+);"""
+
+# Monthly Statement will later be a sub table of AccountStatements
+MonthlyStatement = """
+CREATE TABLE `MonthlyStatement` (
+    `AccountNumber`  bigint      NOT NULL ,
+    'TXNMonth'       date        NOT NULL ,
+    'OpeningBalance' numeric     NULL ,
+    'ClosingBalance' numeric     NULL ,
 
     CONSTRAINT fk_ACNumber
         FOREIGN KEY (`AccountNumber`)

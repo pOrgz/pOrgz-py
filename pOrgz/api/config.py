@@ -9,5 +9,5 @@ def defaults(param : str) -> str:
     # RECOMENDED: Not to Change the Directory
     return {
         'base_dir'  : lambda : os.path.join('.', '.users'),
-        'base_file' : lambda : os.path.join(self.userDir, 'users.json')
+        'base_file' : lambda : os.path.join('.', '.users', 'users.json')
     }.get(param, lambda : (_ for _ in ()).throw(ValueError(f'{param} is not Valid: Please Raise an Issue')))()
