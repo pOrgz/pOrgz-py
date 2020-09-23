@@ -7,7 +7,7 @@ assignees : ''
 
 ---
 ## Overview
-[NOTE]: # ( Give a BRIEF summary about your problem )
+[NOTE]: # ( Give a BRIEF summary of your problem )
 
 
 ## Steps to Reproduce
@@ -26,9 +26,7 @@ assignees : ''
 
 ## Context
 [NOTE]: # ( Give us any additional information you may have. )
-
-
-[NOTE]: # ( Paste error detailed traceback )
+[NOTE]: # ( Also, Paste error detailed traceback )
 
 
 [NOTE]: # ( Pick choices based on your environment )
