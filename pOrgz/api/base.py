@@ -13,6 +13,7 @@ from ..commons.SQLite3 import (
         # Get SQLite Statements to Create Required Tables
         AccountDetails,
         AccountStatements,
+        MonthlyStatement,
         # MobileWallets
     )
 
@@ -176,7 +177,7 @@ class pOrgz:
 
         # Create all Required Tables: Only One Query can be Executed at a Time
         if create_table:
-            for query in [AccountDetails, AccountStatements]:
+            for query in [AccountDetails, AccountStatements, MonthlyStatement]:
                 con.execute(query)
         
         con.close() # Close DB File

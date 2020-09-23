@@ -52,7 +52,6 @@ CREATE TABLE `MonthlyStatement` (
     `AccountNumber`  bigint      NOT NULL ,
     'TXNMonth'       date        NOT NULL ,
     'OpeningBalance' numeric     NULL ,
-    'ClosingBalance' numeric     NULL ,
 
     CONSTRAINT fk_ACNumber
         FOREIGN KEY (`AccountNumber`)
